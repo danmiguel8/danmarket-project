@@ -1,0 +1,19 @@
+DAN MIGUEL ELOÏME MOULENGOU
+L3 GLRS - ISM
+
+Information du client créé lors que ma présentation (pour voir ses achats et faire des publications avec son compte) :
+    login : aly
+    mdp : passer
+
+Pour la partie admin: http://localhost:5000/admin>
+    login : dan
+    mdp : passer
+
+NB: Si vous essayez d'accéder à la partie Admin lorsque vous êtes connecté comme client,
+vous tomberez sur une page 403 vous n'avez pas l'autorisation
+
+Dans la vue contact on peut envoyer des emails
+Le projet est hyper méga coollllll, c'est dommage que je ne puisse pas tout vous montrer 😔
+
+
+ 

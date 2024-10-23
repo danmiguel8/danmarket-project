@@ -1,0 +1,96 @@
+{% extends "layouts/layout.html" %}
+{% block title %}Publication{% endblock %}
+
+{% block home %}{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/publier.css')}}">
+
+    <div class="marginTop">
+        <!-- Section: Design Block -->
+    <section class="text-lg-start text-dark">
+
+    
+      <!-- Jumbotron -->
+        <div class="container py-4">
+            <div class="row g-0 align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="card cascading-right" style="
+                    background: hsla(0, 0%, 100%, 0.55);
+                    backdrop-filter: blur(30px);
+                    ">
+                <div class="card-body p-5 shadow-5">
+                    <h2 class="fw-bold mb-5">Publier une annonce</h2>
+                    <form action="{{ url_for('publierannonce') }}" method="post" enctype = "multipart/form-data">
+                        <div class="mb-4">
+                            <div class="form-outline">
+                                <label class="form-label" for="form3Example2">Titre</label>
+                                <input type="text" id="form3Example2" required name="titre" value="" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="form-outline">
+                                <label class="form-label" for="form3Example3">Description</label>
+                                <textarea class="form-control" name="description" ></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="form-outline">
+                                <label class="form-label" for="form3Example4">Prix</label>
+                                <input type="number" min="1" required id="form3Example4" name="prix" value="" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label" for="form3Example5">Localité</label>
+                            <div class="form-outline">
+                                <select class="form-control" required name="localite">
+                                    {% for l in localites %}
+                                        <option value="{{l.id}}">{{l.libelle}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label" for="form3Example5">Catégorie</label>
+                            <div class="form-outline">
+                                <select class="form-control" required name="categorie">
+                                    {% for c in categories %}
+                                        <option value="{{c.id}}">{{c.libelle}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="form-outline">
+                                <label class="form-label" for="customFile">Image principale</label>
+                                <input required type="file" name="imagePrincipale" class="form-control" id="customFile"/>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="form-outline">
+                                <label class="form-label" for="customFile">Images secondaires</label>
+                                <input type="file" name="imageSecondaires" class="form-control" id="customFiles" multiple />
+                            </div>
+                        </div>                
+                        <button type="submit" class="cursorPointer btn btn-primary btn-block mb-4">
+                            Publier
+                        </button>
+                    </form>
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                    class="img-fluid" alt="Sample image">
+                </div>
+            </div>
+        </div>  
+      
+      <!-- Jumbotron -->
+    </section>
+    <!-- Section: Design Block -->
+    </div>
+
+    {% include "./shared/error.html" %}
+
+{% endblock %}

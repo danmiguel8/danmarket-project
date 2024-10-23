@@ -1,0 +1,55 @@
+{% extends "layouts/layout.html" %}
+{% block title %}Boutique{% endblock %}
+
+{% block home %}{% endblock %}
+
+{% block content %}
+
+<section >
+    <div style="flex:2; color:white; padding-top:13%;">
+        <div class="container">
+            {% if objetCherche !="" %}
+                <h3>Recherché : {{objetCherche}}</h3>
+            {% endif %}
+            <form class="input-group p-1 rounded bg-dark" action="{{ url_for('boutique') }}" method="post">
+                <input type="hidden" name="boutique">
+                <select name="categorie" class="form-control mr-2 text-dark rounded" style="cursor: pointer;">
+                    <option value="">Toutes les catégories</option>
+                    {% for c in categories %}
+                        <option {% if c.id == selectedCategorie %}selected{% endif %} value="{{c.id}}">
+                            {{c.libelle}}
+                        </option>
+                    {% endfor %}
+                </select>
+                <input type="search" class="form-control rounded mr-2" name="quoi" value="{{objetCherche}}" placeholder="Quoi?" aria-label="Search" aria-describedby="search-addon" />
+                <select name="ou" class="form-control rounded mr-2" style="cursor: pointer;">
+                    <option value="">Partout</option>
+                    {% for l in localites %}
+                        <option {% if l.id == selectedLocalite %}selected{% endif %} value="{{l.id}}">
+                            {{l.libelle}}
+                        </option>
+                    {% endfor %}
+                </select>
+                <button style="cursor: pointer;" type="submit" class="btn btn-outline-dark text-white border-0" data-mdb-ripple-init>Trouver</button>
+            </form>
+        </div>
+    </div>
+    <div class="banner" style="flex:7; margin-top:-1%">
+        <div class="new_arrivals">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="section_title new_arrivals_title">
+                            <h2>Annonces</h2>
+                        </div>
+                    </div>
+                </div>
+                {% include "./shared/annonce.html" %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "./shared/error.html" %}
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "layouts/layout.html" %}
+{% block title %}Favoris{% endblock %}
+
+{% block home %}{% endblock %}
+
+{% block content %}
+
+<section >
+    <div style="flex:2; color:white; padding-top:13%;">
+    </div>
+    <div class="banner" style="flex:7; margin-top:-1%">
+        <div class="new_arrivals">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="section_title new_arrivals_title">
+                            <h2>Articles favoris</h2>
+                        </div>
+                    </div>
+                </div>
+                {% include "./shared/annonce.html" %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "./shared/error.html" %}
+
+{% endblock %}

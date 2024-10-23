@@ -1,0 +1,82 @@
+{% extends 'admin/master.html' %}
+{% block head_css %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+    <section class="py-5">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-2 col-md-4 col-6 gy-4 gy-xl-0">
+          <div class="d-flex">  
+            <div class="ms-2">
+              <p class="display-6 mb-0"><img src="{{logo}}" height="150px" width="150px"></p>
+            </div>
+          </div>
+        </div>
+        <!-- Count item widget-->
+        <div class="col-xl-2 col-md-4 col-6 gy-4 gy-xl-0 mt-4">
+          <div class="d-flex">
+            <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
+              <use xlink:href="#user-1"> </use>
+            </svg>
+            <div class="ms-2">
+              <a href="/admin/user"><h3 class="h4 text-dark text-uppercase fw-normal">utilisateurs</h3></a>
+              <p class="display-6 mb-0">{{users}}</p>
+            </div>
+          </div>
+        </div>
+        <!-- Count item widget-->
+        <div class="col-xl-2 col-md-4 col-6 gy-4 gy-xl-0 mt-4">
+          <div class="d-flex">
+            <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
+              <use xlink:href="#survey-1"> </use>
+            </svg>
+            <div class="ms-2">
+              <a href="/admin/annonce"><h3 class="h4 text-dark text-uppercase fw-normal">articles</h3></a>
+              <p class="display-6 mb-0">{{articles}}</p>
+            </div>
+          </div>
+        </div>
+        <!-- Count item widget-->
+        <div class="col-xl-2 col-md-4 col-6 gy-4 gy-xl-0 mt-4">
+          <div class="d-flex">
+            <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
+              <use xlink:href="#list-details-1"> </use>
+            </svg>
+            <div class="ms-2">
+              <a href="/admin/categorie"><h3 class="h4 text-dark text-uppercase fw-normal">Catégories</h3></a>
+              <p class="display-6 mb-0">{{categories}}</p>
+            </div>
+          </div>
+        </div>
+        <!-- Count item widget-->
+        <div class="col-xl-2 col-md-4 col-6 gy-4 gy-xl-0 mt-4">
+          <div class="d-flex">
+            <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
+              <use xlink:href="#numbers-1"> </use>
+            </svg>
+            <div class="ms-2">
+              <a href="/admin/localite"><h3 class="h4 text-dark text-uppercase fw-normal">Localités</h3></a>
+              <p class="display-6 mb-0">{{localites}}</p>
+            </div>
+          </div>
+        </div>
+        <!-- Count item widget-->
+        <div class="col-xl-2 col-md-4 col-6 gy-4 gy-xl-0 mt-4">
+          <div class="d-flex">
+            <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
+              <use xlink:href="#literature-1"> </use>
+            </svg>
+            <div class="ms-2">
+              <h3 class="h4 text-dark text-uppercase fw-normal">Vendus</h3>
+              <p class="display-6 mb-0">{{vendus}}</p>
+            </div>
+          </div>
+        </div>
+        <!-- Count item widget-->
+      </div>
+    </div>
+    </section>
+    <!-- JavaScript files-->
+   
+{% endblock %}

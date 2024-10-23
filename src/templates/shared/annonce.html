@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col">
+        <div class="product-grid row">
+
+            <!-- Product -->
+            {% for a in annonces %}
+                <div class="product-item men" id="{{a.id}}">
+                    <div class="product discount product_filter">
+                        <div class="product_image">
+                            <a href="/details/{{a.id}}"><img src="{{a.img}}" alt=""></a>
+                        </div>
+                        {% if a.vendu != 1 or home =="favorite"%}
+                            <a href="/favoris/{{a.id}}/{{home}}"><div class="favorite favorite_left"></div></a>
+                        {% endif %}
+                        {% if a.vendu == 1 %}
+                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>VENDU</span></div>
+                        {% endif %}
+                        <div class="product_info" >
+                            <h6 class="product_name">
+                                <span style="color: red;">
+                                    {% for l in localites %}
+                                        {% if l.id == a.localite_id %}
+                                           {{l.libelle}}
+                                        {% endif %}
+                                    {% endfor %}
+                                </span> | 
+                                <a href="/details/{{a.id}}" class="product_name">{{a.titre}}</a>
+                            </h6>
+                            <div class="product_price">{{a.prix}} FCFA</div>
+                            {# <div class="product_price">$520.00<span>$590.00</span></div> #}
+
+                        </div>
+                    </div>
+                    {% if a.vendu != 1 %}
+                        <div {% if a.vendu == 1 %} disabled {% endif %} class="red_button add_to_cart_button"><a href="/panier/{{a.id}}/{{home}}">Ajouter au panier</a></div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>

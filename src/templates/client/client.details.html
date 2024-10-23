@@ -1,0 +1,202 @@
+{% extends "layouts/layout.html" %}
+{% block title %}Détails | {{annonce.titre}}{% endblock %}
+
+{% block home %}{% endblock %}
+
+{% block content %}
+
+    <section class=" container" style="padding-top:13%">
+        <link rel='stylesheet' href="{{url_for('static',filename='css/details.css')}}">
+        <link rel='stylesheet' href='https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css'>
+        <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'>
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css">
+        <style>
+            .ecommerce-gallery-main-img {
+                width: 100%;
+                height: 400px;
+                object-fit: contain; 
+                transition: transform 0.3s ease;
+            }
+
+            .lightbox {
+                position: relative;
+                overflow: hidden;
+                height: 100%;
+                width: 100%;
+                cursor: zoom-in;
+            }
+
+            .zoomed {
+                transform: scale(3);
+            }
+
+            .thumb {
+                width: 100%; 
+                height: 100%; 
+                object-fit: cover; 
+            }
+        </style>
+
+
+
+        <div class="container-fluid mt-2 mb-3">
+            <div class="row no-gutters"> 
+                <div class="col-md-5 pr-2"> 
+                    <div class="ecommerce-gallery" data-mdb-ecommerce-gallery-init data-mdb-zoom-effect="true" data-mdb-auto-height="true">
+                        <div class="row py-3 shadow-5">
+                            <div class="col-12 mb-1">
+                                <div class="lightbox" data-mdb-lightbox-init>
+                                    <img
+                                        src="{{annonce.img}}"
+                                        alt="Gallery image 1"
+                                        class="ecommerce-gallery-main-img active w-100"
+                                        id="mainImage"
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-3 mt-1">
+                                <img
+                                    src="{{annonce.img}}"
+                                    data-mdb-img="{{annonce.img}}"
+                                    alt="Gallery image 1"
+                                    class="thumb w-100"
+                                />
+                            </div>
+                            {% for img in images %}
+                                <div class="col-3 mt-1">
+                                    <img
+                                        src="{{img}}"
+                                        data-mdb-img="{{img}}"
+                                        alt="Gallery image 1"
+                                        class="thumb w-100"
+                                    />
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="card mt-2 mb-2"> 
+                        <h6>Nombre de vues</h6> 
+                        <div class="d-flex flex-row"> 
+                            <div class="stars"> <i class="fa fa-eye"></i></div> 
+                            <span class="ml-1 font-weight-bold">{{annonce.nbreVue}}</span> 
+                        </div> <hr> 
+                        <div class="badges"> 
+                            <span class="badge bg-warning"> <i class="fa fa-heart"></i> <span class="ml-1">{{like}}</span> </span> 
+                        </div> 
+                    </div> 
+                </div> 
+                <div class="col-md-7"> 
+                    <div class="card"> 
+                        <div class="d-flex flex-row align-items-center"> 
+                            <div class="p-ratings"> 
+                                
+                            </div> 
+                        </div> 
+                        <div class="about"> 
+                            <h3 class="font-weight-bold">{{annonce.titre}} </h3> 
+                            <h4 class="font-weight-bold">{{annonce.prix}} FCFA</h4> 
+                        </div> 
+                        {% if voir == "ok" %}
+                            <div class="buttons"> 
+                                {% if annonce.vendu == 0 %}
+                                    <a href="/panier/{{annonce.id}}/{{home}}">
+                                        <button class="btn btn-outline-warning btn-long cart cursorPointer">Ajouter au panier</button> 
+                                    </a>
+                                    <a href="/favoris/{{annonce.id}}/{{home}}">
+                                        <button class="btn btn-light wishlist cursorPointer"> <i class="fa fa-heart"></i> </button> 
+                                    </a>
+                                {% endif %}
+                            </div>
+                        {% endif %} 
+                        <hr> 
+                        <div class="product-description"> 
+                            <div class="d-flex flex-row align-items-center"> 
+                                <i class="fa fa-calendar-check-o"></i> 
+                                <span class="ml-1">Publié le {{annonce.date}}</span> 
+                            </div> 
+                            <div class="mt-2"> 
+                                <span class="font-weight-bold">Description</span> 
+                                <p>
+                                    {{annonce.description}}
+                                </p> 
+                            </div> 
+                            <div class="mt-2"> 
+                                <span class="font-weight-bold">Boutique</span> 
+                            </div> 
+                            <div class="d-flex flex-row align-items-center"> 
+                                <img src="{{logo}}" class="rounded-circle store-image" > 
+                                <div class="d-flex flex-column ml-1 comment-profile"> 
+                                    <div class="comment-ratings"> 
+                                        <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
+                                    </div> 
+                                    <span class="username">DANMARKET</span> 
+                                    <small class="followers">Votre partenaire sûr!</small> 
+                                </div> 
+                            </div> 
+                        </div> </div> 
+                        {% if voir == "ok" %}
+                            <div class="card mt-2"> 
+                                <span>Similaire :</span> 
+                                <div class="similar-products mt-2 d-flex flex-row"> 
+                                    {% for s in similaire %}
+                                        <a href="/details/{{s.id}}">
+                                            <div class="card border p-1" style="width: 9rem;margin-right: 3px;"> 
+                                                <img src="{{s.img}}" class="card-img-top" alt="..."> 
+                                                <div class="card-body"> 
+                                                    <h6 class="card-title">{{s.prix}} FCFA</h6> 
+                                                </div> 
+                                            </div>
+                                        </a> 
+                                    {% endfor %}                           
+                                </div> 
+                            </div>
+                        {% endif %} 
+                    </div> 
+                </div> 
+        </div> 
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+        <script src='https://sachinchoolur.github.io/lightslider/dist/js/lightslider.js'></script>
+        <script> $('#lightSlider').lightSlider({ gallery: true, item: 1, loop: true, slideMargin: 0, thumbItem: 9 });</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+            const mainImage = document.getElementById('mainImage');
+            const thumbnails = document.querySelectorAll('.thumb');
+            const lightbox = document.querySelector('.lightbox');
+
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', () => {
+                mainImage.src = thumbnail.dataset.mdbImg;
+                thumbnails.forEach(thumb => thumb.classList.remove('active'));
+                    thumbnail.classList.add('active');
+                });
+            });
+
+            mainImage.addEventListener('mouseover', () => {
+                mainImage.classList.add('zoomed');
+            });
+
+            mainImage.addEventListener('mouseout', () => {
+                mainImage.classList.remove('zoomed');
+                mainImage.style.transformOrigin = 'center center';
+            });
+
+            mainImage.addEventListener('mousemove', (e) => {
+                if (mainImage.classList.contains('zoomed')) {
+                const rect = lightbox.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                mainImage.style.transformOrigin = `${(x / rect.width) * 100}% ${(y / rect.height) * 100}%`;
+                }
+            });
+            });
+        </script>
+                    
+    </section>
+
+{% endblock %}
+
+{% include "./shared/error.html" %}

@@ -1,0 +1,85 @@
+{% extends "layouts/layout.html" %}
+{% block title %}Panier{% endblock %}
+
+{% block home %}{% endblock %}
+
+{% block content %}
+    <section class="d-flex container" style="margin-top: 15%;">
+        <div style="flex:5;" class="mr-2">
+            <table class="table table-striped">
+                <tr>
+                    <th>*</th>
+                    <th>Article(s)</th>
+                    <th>Prix</th>
+                    <th>Opération</th>
+                </tr>
+                {% for p in panier %}
+                    <tr>
+                        <td><img src="{{p.img}}" height="100" width="100" alt=""></td>
+                        <td style="padding-top: 5%;">{{p.titre}}</td>
+                        <td style="padding-top: 5%;">{{p.prix}}</td>
+                        <td style="padding-top: 5%;">
+                            <a class="btn btn-danger btn-sm mr-2 cursorPointer text-white" href="/retirer/{{p.id}}" role="button">Retirer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div style="flex: 2; background-color:#f2f2f2; height:25vh">
+            <h4 class="font-weight-bold p-2 mt-3"><span style="color: red;">TOTAL</span> <span class="float-right">{{total}} FCFA</span></h4>
+            {% if total > 0 %}
+                <form method="post" action="{{ url_for('paiement') }}" class="float-right mt-4 mr-2">
+                    <script
+                        src="https://checkout.stripe.com/checkout.js"
+                        class="stripe-button"
+                        data-key="{{ public_key }}"
+                        data-amount="{{ total }}"
+                        data-name="Transaction"
+                        data-description="Votre achat sur le site DANMARKET"
+                        data-label="Valider la commande"
+                        data-currency="xof"
+                        data-locale="fr"
+                        data-image="{{logo}}"
+                        data-color="#336699"
+                        data-allow-remember-me="true"
+                        data-panel-label="Payer {{ total }} FCFA"
+                        data-zip-code="true"
+                    >
+                    </script>
+                </form>
+            {% endif %}
+            
+        </div>
+    </section>
+{% endblock %}
+
+{% with sucess = get_flashed_messages(category_filter=["succesPanier"]) %}
+    {# background-color:rgba(0, 0, 0, 0.5) #}
+    {% if sucess %}
+        <section id="section"  class="d-flex align-items-center justify-content-center" style="z-index: 1000; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color:rgba(0, 0, 0, 0.5)">
+            <div class="alert alert-warning alert-dismissible fade show container" >
+                {% for msg in sucess %}
+                    <p class="text-dark">{{ msg }}</p>
+                {% endfor -%}
+                <button id="btnClose" type="button" class="close cursorPointer">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </section>
+    {% endif %}
+{% endwith %}
+
+  
+<script>
+    const btnClose = document.querySelector("#btnClose");
+    const section = document.querySelector("#section")
+    btnClose.addEventListener("click", function(){
+        if(section.classList.contains('d-flex')){
+            section.classList.remove('d-flex');
+            section.classList.add('d-none')
+        }else{
+            section.classList.remove('d-none');
+            section.classList.add('d-flex');
+        }
+    });
+</script>

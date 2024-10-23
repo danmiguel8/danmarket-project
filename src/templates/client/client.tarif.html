@@ -1,0 +1,128 @@
+{% extends "layouts/layout.html" %}
+{% block title %}Tarifs{% endblock %}
+
+{% block home %}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/tarif.css')}}">
+<section  class="pricing py-5 marginTop">
+    <div class="container">
+      <div class="row">
+        <!-- Free Tier -->
+        <div class="col-lg-4">
+          <div class="card mb-5 mb-lg-0">
+            <div class="card-body">
+              <h5 class="card-title text-muted text-uppercase text-center">Standard</h5>
+              <h6 class="card-price text-center">€0<span class="period"></span></h6>
+              <hr>
+              <ul class="fa-ul">
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Jusqu'à 3 images autorisées</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>En ligne pendant 90 jours</li>
+              </ul>
+              <div class="d-grid">
+                <form method="post" action="{{ url_for('paiement') }}" class="mt-4 mr-2">
+                    <input type="hidden" name="typeTarif" value="standard"/>
+                    <script
+                        src="https://checkout.stripe.com/checkout.js"
+                        class="stripe-button"
+                        data-key="{{ public_key }}"
+                        data-name="Transaction"
+                        data-description="Votre choix d'abonnement chez DANMARKET"
+                        data-label="Souscrire"
+                        data-currency="eur"
+                        data-locale="fr"
+                        data-image="{{logo}}"
+                        data-color="#336699"
+                        data-allow-remember-me="true"
+                        data-panel-label="Payer 0€"
+                        data-zip-code="true"
+                    >
+                    </script>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Plus Tier -->
+        <div class="col-lg-4">
+          <div class="card mb-5 mb-lg-0">
+            <div class="card-body">
+              <h5 class="card-title text-muted text-uppercase text-center">Premium</h5>
+              <h6 class="card-price text-center">€13<span class="period">/mois</span></h6>
+              <hr>
+              <ul class="fa-ul">
+                <li><span class="fa-li"><i class="fas fa-check"></i></span><strong>15 jours de promotion</strong></li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Jusqu'à 10 images autorisées</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>En vedette sur la page d'accueil</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>En vedette dans la catégorie</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>En ligne pendant 90 jours</li>
+              </ul>
+              <div class="d-grid">
+                <form method="post" action="{{ url_for('paiement') }}" class="mt-4 mr-2">
+                    <input type="hidden" name="typeTarif" value="premium"/>
+                    <script
+                        src="https://checkout.stripe.com/checkout.js"
+                        class="stripe-button"
+                        data-key="{{ public_key }}"
+                        data-name="Transaction"
+                        data-description="Votre choix d'abonnement chez DANMARKET"
+                        data-label="Souscrire"
+                        data-currency="eur"
+                        data-locale="fr"
+                        data-image="{{logo}}"
+                        data-color="#336699"
+                        data-allow-remember-me="true"
+                        data-panel-label="Payer 13€"
+                        data-zip-code="true"
+                    >
+                    </script>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Pro Tier -->
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-muted text-uppercase text-center">Premium+</h5>
+              <h6 class="card-price text-center">€18<span class="period">/mois</span></h6>
+              <hr>
+              <ul class="fa-ul">
+                <li><span class="fa-li"><i class="fas fa-check"></i></span><strong>20 jours de promotion</strong>
+                </li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Jusqu'à 15 images autorisées</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited Public Projects</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>En vedette sur la page d'accueil</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>En vedette dans la catégorie</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>En ligne pendant 90 jours</li>
+              </ul>
+              <div class="d-grid">
+                <form method="post" action="{{ url_for('paiement') }}" class="mt-4 mr-2">
+                    <input type="hidden" name="typeTarif" value="premium+"/>
+                    <script
+                        src="https://checkout.stripe.com/checkout.js"
+                        class="stripe-button"
+                        data-key="{{ public_key }}"
+                        data-name="Transaction"
+                        data-description="Votre choix d'abonnement chez DANMARKET"
+                        data-label="Souscrire"
+                        data-currency="eur"
+                        data-locale="fr"
+                        data-image="{{logo}}"
+                        data-color="#336699"
+                        data-allow-remember-me="true"
+                        data-panel-label="Payer 18€"
+                        data-zip-code="true"
+                    >
+                    </script>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

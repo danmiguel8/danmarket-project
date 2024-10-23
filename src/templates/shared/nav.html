@@ -1,0 +1,89 @@
+<header class="header trans_300">
+
+    <!-- Top Navigation -->
+
+    <div class="top_nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="top_nav_left">WELCOME TO DANMARKET'S</div>
+                </div>
+                <div class="col-md-6 text-right">
+                    <div class="top_nav_right">
+                        <ul class="top_nav_menu">
+                            <!-- Currency / Language / My Account -->
+                            {% if userconnected != "" %}
+                                {% if userconnected.role  == 'admin' %}
+                                    <li class="language">
+                                        <a href="/admin/login">
+                                            Admin
+                                        </a> 
+                                    </li>  
+                                {% endif %}
+                            {% endif %}
+                            <li class="account">
+                                <a href="/compte">
+                                    Mon compte
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="account_selection">
+                                    {% if userconnected == "" %}
+                                        <li><a href="/connexion"><i class="fa fa-sign-in" aria-hidden="true"></i>Connexion</a></li>
+                                    {% else %}
+                                        <li><a href="/deconnexion"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign out</a></li>
+                                    {% endif %}
+                                    <li><a href="/inscription"><i class="fa fa-user-plus" aria-hidden="true"></i>Inscription</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+
+    <div class="main_nav_container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-right">
+                    <div class="logo_container">
+                        <a href="/">Dan<span>Market</span></a>
+                    </div>
+                    <nav class="navbar">
+                        <ul class="navbar_menu">
+                            <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+                            <li><a href="/boutique"><i class="fa-solid fa-shop"></i>Boutique</a></li>
+                            {% if userconnected != "" %}
+                                {% if userconnected.role  == 'client' %}
+                                    <li><a href="/gestionnaire">Gestionnaire</a></li>
+                                    <li><a href="/mesachats">Mes Achats</a></li>
+                                {% endif %}
+                            {% endif %}
+                            <li><a href="/tarif"><i class="fa fa-tags"></i>Tarifs</a></li>
+                            <li><a href="/contact">contact</a></li>
+                        </ul>
+                        <ul class="navbar_user">
+                            <li><a class="red_button" href="/publierannonce"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></li>
+                            <i><a href="/favoris"><i class="fa-solid fa-heart"></i></a></i>
+                            <li class="checkout">
+                                <a href="/panier/page">
+                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                    {% if nbre > 0 and panier != [] %}
+                                        <span id="checkout_items" class="checkout_items">{{nbre}}</span>
+                                    {% endif %}
+                                    
+                                </a>
+                            </li>
+                        </i>
+                        <div class="hamburger_container">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>

@@ -1,0 +1,108 @@
+{% extends "layouts/layout.html" %}
+{% block title %}Gestion{% endblock %}
+
+{% block home %}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<!-- Choices CSS-->
+<link rel="stylesheet" href="{{url_for('static',filename='vendor/choices.js/public/assets/styles/choices.min.css')}}">
+<!-- Custom Scrollbar-->
+<link rel="stylesheet" href="{{url_for('static',filename='vendor/overlayscrollbars/css/OverlayScrollbars.min.css')}}">
+<!-- theme stylesheet-->
+<!-- Custom stylesheet - for your changes-->
+<link rel="stylesheet" href="{{url_for('static',filename='css/custom.css')}}">
+
+<!-- Favicon-->
+<style>
+    .hovers{
+        color: black;
+    }
+    .hovers:hover{
+        color: crimson;
+        text-decoration: underline;
+    }
+</style>
+<div style="flex:2; color:white; padding-top:13%;">
+    <div class="container">
+        <div class="row">
+            <section class="py-5">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-2 col-md-4 col-6 gy-4 gy-xl-0">
+                        <div class="d-flex">  
+                            <div class="ms-2">
+                            <p class="display-6 mb-0"><img src="{{logo}}" height="150px" width="150px"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Count item widget-->
+                    <div class="col-xl-2 col-md-4 col-6 gy-4 gy-xl-0 mt-4">
+                        <div class="d-flex">
+                            <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
+                                <i class="fa-regular fa-newspaper"></i>
+                            </svg>
+                            <div class="ms-2">
+                                <a href="/mesannonces"><h3 class="h4 hovers text-uppercase fw-normal">annonces</h3></a>
+                                <h4 class="display-6 mb-0">{{nbreArticles}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Count item widget-->
+                    <div class="col-xl-2 col-md-4 col-6 gy-4 gy-xl-0 mt-4">
+                        <div class="d-flex">
+                            <svg class="svg-icon svg-icon-sm svg-icon-heavy text-primary mt-1 flex-shrink-0">
+
+                            </svg>
+                            <div class="ms-2">
+                                <a href="/mesventes"><h3 class="h4 hovers text-uppercase fw-normal">Vendus</h3></a>
+                                <h4 class="display-6 mb-0">{{nbreVentes}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Count item widget-->
+                </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+  <script src="{{url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/chart.js/Chart.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/just-validate/js/just-validate.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/choices.js/public/assets/scripts/choices.min.js')}}"></script>
+    <script src="{{url_for('static',filename='vendor/overlayscrollbars/js/OverlayScrollbars.min.js')}}"></script>
+    <!-- Main File-->
+    <script src="{{url_for('static',filename='js/front.js')}}"></script>
+    <script>
+      // ------------------------------------------------------- //
+      //   Inject SVG Sprite - 
+      //   see more here 
+      //   https://css-tricks.com/ajaxing-svg-sprite/
+      // ------------------------------------------------------ //
+      function injectSvgSprite(path) {
+      
+          var ajax = new XMLHttpRequest();
+          ajax.open("GET", path, true);
+          ajax.send();
+          ajax.onload = function(e) {
+          var div = document.createElement("div");
+          div.className = 'd-none';
+          div.innerHTML = ajax.responseText;
+          document.body.insertBefore(div, document.body.childNodes[0]);
+          }
+      }
+      // this is set to BootstrapTemple website as you cannot 
+      // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
+      // while using file:// protocol
+      // pls don't forget to change to your domain :)
+      injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg'); 
+      
+      
+    </script>
+    <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+{% endblock %}

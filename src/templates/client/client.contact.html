@@ -1,0 +1,58 @@
+{% extends "layouts/layout.html" %}
+{% block title %}Contact{% endblock %}
+
+{% block home %}{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{url_for('static',filename='css/contact.css')}}">
+<style>
+	textarea {
+		resize: none;
+		max-height: 100px;
+	}
+</style>
+<div style="padding-top:13%;margin-bottom: 25%;" class="container contact">
+	<div class="row">
+		<div class="col-md-3">
+			<div class="contact-info">
+				<img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image"/>
+				<h3 class="fw-bold">Contactez-Nous</h3>
+				<h5>Nous vous assisterons!</h5>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<form method="post" action="{{ url_for('sendmail') }}" class="contact-form">
+				<div class="form-group">
+					<label class="control-label col-sm-5" for="lname">Nom et Prenom</label>
+					<div class="col-sm-10">          
+						<input type="text" class="form-control" id="lname" placeholder="" name="name">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="email">Email</label>
+					<div class="col-sm-10">
+						<input type="email" required class="form-control" id="email" placeholder="" name="email">
+					</div>
+				</div>
+				<div class="form-group">
+				  	<label class="control-label col-sm-2" for="comment">Comment</label>
+					<div class="col-sm-10">
+						<textarea class="form-control" rows="5" name="comment"  id="comment"></textarea>
+					</div>
+				</div>
+				<div class="form-group">        
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="cursorPointer btn btn-default">Submit</button>
+					</div>
+				</div>
+			</form>
+			</div>
+		</div>
+	</form>
+</div>
+
+{% include "./shared/error.html" %}
+
+{% endblock %}
+

@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css">
+<style>
+            .ecommerce-gallery-main-img {
+                width: 100%;
+                height: 400px;
+                object-fit: contain; 
+                transition: transform 0.3s ease;
+            }
+
+            .lightbox {
+                position: relative;
+                overflow: hidden;
+                height: 100%;
+                width: 100%;
+                cursor: zoom-in;
+            }
+
+            .zoomed {
+                transform: scale(3);
+            }
+
+            .thumb {
+                width: 100%; 
+                height: 100%; 
+                object-fit: cover; 
+            }
+        </style>
+
+<div class="ecommerce-gallery" data-mdb-ecommerce-gallery-init data-mdb-zoom-effect="true" data-mdb-auto-height="true">
+    <div class="row py-3 shadow-5">
+        <div class="col-12 mb-1">
+            <div class="lightbox" data-mdb-lightbox-init>
+                <img
+                    src="{{annonce.img}}"
+                    alt="Gallery image 1"
+                    class="ecommerce-gallery-main-img active w-100"
+                    id="mainImage"
+                />
+            </div>
+        </div>
+        <div class="col-3 mt-1">
+            <img
+                src="{{annonce.img}}"
+                data-mdb-img="{{annonce.img}}"
+                alt="Gallery image 1"
+                class="thumb w-100"
+            />
+        </div>
+        {% for img in images %}
+            <div class="col-3 mt-1">
+                <img
+                    src="{{img}}"
+                    data-mdb-img="{{img}}"
+                    alt="Gallery image 1"
+                    class="thumb w-100"
+                />
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+            const mainImage = document.getElementById('mainImage');
+            const thumbnails = document.querySelectorAll('.thumb');
+            const lightbox = document.querySelector('.lightbox');
+
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', () => {
+                mainImage.src = thumbnail.dataset.mdbImg;
+                thumbnails.forEach(thumb => thumb.classList.remove('active'));
+                    thumbnail.classList.add('active');
+                });
+            });
+
+            mainImage.addEventListener('mouseover', () => {
+                mainImage.classList.add('zoomed');
+            });
+
+            mainImage.addEventListener('mouseout', () => {
+                mainImage.classList.remove('zoomed');
+                mainImage.style.transformOrigin = 'center center';
+            });
+
+            mainImage.addEventListener('mousemove', (e) => {
+                if (mainImage.classList.contains('zoomed')) {
+                const rect = lightbox.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                mainImage.style.transformOrigin = `${(x / rect.width) * 100}% ${(y / rect.height) * 100}%`;
+                }
+            });
+            });
+        </script>
